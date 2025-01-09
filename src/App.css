@@ -1,0 +1,127 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 16px; 
+  padding: 16px;
+}
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    grid-template-columns: 1fr; 
+  }
+}
+.navbar{
+  display: flex;
+  margin: 5px;
+  padding: 2px;
+  
+  list-style: none;
+}
+.Link a{
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+  padding: 14px;
+  margin: 5px;
+  
+  
+
+}
+.body{
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+
+
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  background-color: #d2cfcf;
+}
+
+
+
+.card-title {
+  padding: 8px 12px;
+  font-size: 1rem;
+  color: #333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.card-body{
+  padding:  10px;
+  text-align: center;
+}
+.button {
+  display: inline-block;
+  background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 16px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #466d96; 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  background-color: #004085; 
+  transform: translateY(0); 
+}
+
+.button:focus {
+  outline: 3px solid rgba(0, 123, 255, 0.5); 
+}
+
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.loading{
+  font-size:xx-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
