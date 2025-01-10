@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Post from "./Components/Post/Post";
 import Album from "./Components/Album/Album";
+import UserDetails from "./Components/UserDetails/userDetails";
 //url ;
 const App = () => {
 	const [toggle, setToggle] = useState(true);
@@ -15,7 +16,7 @@ const App = () => {
 	const backgroundColor = toggle ? " White" : "gray";
 	return (
 		<>
-			<div style={{ backgroundColor, height: "100%" }}>
+			<div style={{ backgroundColor,height:"100%"}}>
 				<button className="button"
 				
 					onClick={handleToggle}
@@ -30,6 +31,7 @@ const App = () => {
 						element={<Layout />}
 					>
 						<Route index element={<Navbar />} />
+						<Route path="/:id" element={<UserDetails/>}/>
 						<Route path="post" element={<Post />} />
 						<Route path="album" element={<Album />} />
 					</Route>

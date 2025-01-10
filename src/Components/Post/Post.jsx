@@ -5,7 +5,7 @@ import Pagination from "../Pagination/Pagination";
 const Post = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 8;
+  const postsPerPage = 12;
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/posts")
