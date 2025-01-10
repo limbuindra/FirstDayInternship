@@ -1,42 +1,38 @@
 import React from "react";
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Post from "./Components/Post/Post";
 import Album from "./Components/Album/Album";
 import UserDetails from "./Components/UserDetails/userDetails";
+import AlbumDetails from "./Components/AlbumDetails/AlbumDetails";
 //url ;
+export const ColorContext = createContext();
 const App = () => {
-	const [toggle, setToggle] = useState(true);
-
-	const handleToggle = () => {
-		setToggle(!toggle);
+	const [toggle, setToggle] = useState(false);
+	const toggleBackgroundColor = () => {
+		setToggle((prevTheme) => !prevTheme);
 	};
-	const backgroundColor = toggle ? " White" : "gray";
 	return (
 		<>
-			<div style={{ backgroundColor,height:"100%"}}>
-				<button className="button"
-				
-					onClick={handleToggle}
+			<ColorContext.Provider value={{ toggle, toggleBackgroundColor }}>
+				<div
+					style={{
+						backgroundColor: toggle ? "#333" : "#fff",
+					}}
 				>
-					Change Background Color
-				</button>
-				<Routes>
-					<Route
-						path="/"
-						handleToggle={handleToggle}
-						toggle={toggle}
-						element={<Layout />}
-					>
-						<Route index element={<Navbar />} />
-						<Route path="/:id" element={<UserDetails/>}/>
-						<Route path="post" element={<Post />} />
-						<Route path="album" element={<Album />} />
-					</Route>
-				</Routes>
-			</div>
+					<Routes>
+						<Route path="/" element={<Layout />}>
+							<Route index element={<Navbar />} />
+							<Route path="/:id" element={<UserDetails />} />
+							<Route path="/post" element={<Post />} />
+							<Route path="/album" element={<Album />} />
+							<Route path="/album/:albumId" element={<AlbumDetails />} />
+						</Route>
+					</Routes>
+				</div>
+			</ColorContext.Provider>
 		</>
 	);
 };

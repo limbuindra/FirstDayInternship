@@ -23,6 +23,7 @@ const Post = () => {
       <div className="container">
         {currentPosts.map((item) => (
           <div className="card" key={item.id}>
+			<h1 className="card-id">{item.id}</h1>
             <h2 className="card-title">{item.title}</h2>
             <p className="card-body">{item.body}</p>
           </div>

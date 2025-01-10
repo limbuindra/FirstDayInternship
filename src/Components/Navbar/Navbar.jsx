@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom"; 
+import './Navbar.css';
 
 const Navbar = () => {
 	const [data, setData] = useState([]);
 
 	useEffect(() => {
-		axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
+		axios.get("https://jsonplaceholder.typicode.com/users")
+		.then((res) => {
 			setData(res.data);
 		});
 	}, []);
@@ -22,8 +24,8 @@ const Navbar = () => {
 						<p>Username: {item.username}</p>
 						<p>Email: {item.email}</p>
 					</div>
-					<Link to={`/${item.id}`} className="details-link"> {/* Link to user details */}
-						View Details
+					<Link to={`/${item.id}`} className="details-link">
+						User Details
 					</Link>
 				</div>
 			))}

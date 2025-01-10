@@ -30,28 +30,25 @@ body {
 }
 .navbar{
   display: flex;
-  margin: 5px;
+  margin:2px;
   padding: 2px;
-  
-  list-style: none;
+justify-content: space-between;  
+}
+.nav{
+display: flex;
+list-style: none;
+
 }
 .Link a{
   border-radius: 6px;
   text-decoration: none;
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
-  padding: 14px;
+  padding: 15px;
   margin: 5px;
   
   
-
+  
 }
-.body{
-  margin-bottom: 10px;
-  padding: 15px;
-}
-
-
-
 .card {
   background-color: white;
   border: 1px solid #ddd;
@@ -82,19 +79,21 @@ body {
   padding:  10px;
   text-align: center;
 }
+
+
+
 .button {
   display: inline-block;
   background-color: #007bff; 
   color: white;
   border: none;
   border-radius: 8px;
-  margin: 10px;
-  padding: 16px 20px;
+  margin: 19px;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   text-align: center;
 }
 
@@ -125,21 +124,8 @@ body {
   justify-content: center;
 
 }
-/* Pagination.css */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin: 20px 0;
-}
 
-.container {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-	gap: 20px;
-	padding: 20px;
-}
+
 
 .card {
 	border: 1px solid #ccc;
@@ -155,13 +141,14 @@ body {
 	font-weight: bold;
 	margin-top: 10px;
 	display: inline-block;
+  text-decoration: none;
 }
 
 .details-link:hover {
-	text-decoration: underline;
+  color:#404346;
 }
 
-.user-details {
+.user-details, .album-details {
 	margin: 20px auto;
 	max-width: 600px;
 	padding: 20px;
@@ -169,6 +156,7 @@ body {
 	border-radius: 8px;
 	background-color: #fff;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 .user-details h1 {
