@@ -5,15 +5,33 @@ import './Navbar.css';
 
 const Navbar = () => {
 	const [data, setData] = useState([]);
+		const [loading, setLoading] = useState(false);
+		const [error, setError] = useState(null);
 
-	useEffect(() => {
-		axios.get("https://jsonplaceholder.typicode.com/users")
-		.then((res) => {
-			setData(res.data);
-		});
-	}, []);
+		const fetchData = async () => {
+			try {
+				setLoading(true);
 
+				const res = await axios.get(
+					"https://jsonplaceholder.typicode.com/users"
+				);
+				setData(res.data);
+				console.log(res.data);
+			} catch (err) {
+				setError(err.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		useEffect(() => {
+			fetchData();
+		}, []);
+
+		if (loading) return <p className="loading">Loading....</p>;
+		if (error) return <p>Error: {error}</p>;
 	return (
+		<>
 		<div className="container">
 			{data.map((item) => (
 				<div className="card" key={item.id}>
@@ -30,6 +48,7 @@ const Navbar = () => {
 				</div>
 			))}
 		</div>
+			</>
 	);
 };
 

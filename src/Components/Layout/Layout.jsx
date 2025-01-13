@@ -27,9 +27,9 @@ const Layout = () => {
 				</ul>
 				<button
 					onClick={toggleBackgroundColor}
-					className="button"
+					className="button-color"
 				>
-					Change BackgroundColor
+					Dark Mode
 				</button>
 			</nav>
 

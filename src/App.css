@@ -10,6 +10,7 @@ body {
   grid-template-columns: repeat(4, 1fr); 
   gap: 16px; 
   padding: 16px;
+  max-height: 100vh;
 }
 @media (max-width: 1200px) {
   .container {
@@ -33,6 +34,7 @@ body {
   margin:2px;
   padding: 2px;
 justify-content: space-between;  
+background-color: #333;
 }
 .nav{
 display: flex;
@@ -85,6 +87,20 @@ list-style: none;
 .button {
   display: inline-block;
   background-color: #007bff; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin: 19px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+  text-align: center;
+}
+.button-color {
+  display: inline-block;
+  background-color: #535456;
   color: white;
   border: none;
   border-radius: 8px;
@@ -164,3 +180,33 @@ list-style: none;
 	margin-bottom: 20px;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+
+
+.page-link {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.page-link:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}

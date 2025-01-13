@@ -4,20 +4,35 @@ import Pagination from "../Pagination/Pagination";
 
 const Post = () => {
   const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 12;
+  const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
+	const [currentPage, setCurrentPage] = useState(1);
+	const postsPerPage = 8;
 
-  useEffect(() => {
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-	.then((res) => {
-      setPosts(res.data);
-    });
-  }, []);
+	const fetchData = async () => {
+		try {
+			setLoading(true);
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+			const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
+			setPosts(res.data);
+			console.log(res.data);
+		} catch (err) {
+			setError(err.message);
+		} finally {
+			setLoading(false);
+		}
+	};
 
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+	if (loading) return <p className="loading">Loading....</p>;
+	if (error) return <p>Error: {error}</p>;
   return (
     <div>
       <div className="container">

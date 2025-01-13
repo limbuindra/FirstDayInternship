@@ -17,11 +17,9 @@ const App = () => {
 	return (
 		<>
 			<ColorContext.Provider value={{ toggle, toggleBackgroundColor }}>
-				<div
-					style={{
-						backgroundColor: toggle ? "#333" : "#fff",
-					}}
-				>
+				<div style={{ backgroundColor: toggle ? "#333" : "#fff", color: toggle ? "#fff" : "#000" }}>
+				
+				
 					<Routes>
 						<Route path="/" element={<Layout />}>
 							<Route index element={<Navbar />} />
