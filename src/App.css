@@ -4,13 +4,15 @@ body {
   padding: 0;
   background-color: #f9f9f9;
   box-sizing: border-box;
+  max-height: 100vh;
 }
 .container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
   gap: 16px; 
-  padding: 16px;
-  max-height: 100vh;
+  padding: 19px;
+  min-height: 100vh;
+
 }
 @media (max-width: 1200px) {
   .container {
@@ -183,9 +185,11 @@ list-style: none;
 .pagination {
   display: flex;
   justify-content: center;
+  text-align: center;
+  align-items: center;
   list-style: none;
-  padding: 0;
-  margin-top: 20px;
+  margin: 20px ;
+  gap: 10px;
 }
 
 
@@ -194,19 +198,19 @@ list-style: none;
   padding: 10px 15px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
-  color: #007bff;
+  color: #212326;
   cursor: pointer;
   text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .page-link:hover {
-  background-color: #007bff;
+  background-color: #626567;
   color: white;
 }
 
 .page-item.active .page-link {
-  background-color: #007bff;
+  background-color: #545657;
   color: white;
-  border-color: #007bff;
+  border-color: #545657;
 }

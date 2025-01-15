@@ -41,6 +41,7 @@ const Album = () => {
 	return (
 		<>
 			<div className="container">
+				
 				{currentItems.map((album) => (
 					<div className="card" key={album.id}>
 						<h2 className="card-title">{album.title}</h2>

@@ -4,8 +4,8 @@ import { useParams } from "react-router-dom";
 
 const UserDetails = () => {
 	const { id } = useParams(); 
+	console.log(id)
 	const [user, setUser] = useState(null);
-    console.log(id)
 
 	useEffect(() => {
 		axios
