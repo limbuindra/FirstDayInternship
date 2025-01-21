@@ -13,9 +13,13 @@ const Context = ({children}) => {
     ? 'url("src/assets/bg-desktop-dark.jpg")' 
     :  'url("src/assets/bg-desktop-light.jpg")'; 
   
-
+    const backgroundColor = toggle ? "#333 " : "#fff";
+    const textColor = toggle ? "#fff" : "#25273C";
+    const inputField = toggle
+      ? { backgroundColor: "#25273C" }
+      : { backgroundColor: "white" };
   return (
-    <MyContext.Provider value={{toggle,toggleBackgroundColor,backgroundImage}}>
+    <MyContext.Provider value={{toggle,toggleBackgroundColor,backgroundImage,backgroundColor,textColor,inputField}}>
       <div>
         {children}
       </div>

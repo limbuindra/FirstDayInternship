@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { MyContext } from "../Context/Context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
@@ -6,50 +6,77 @@ import { IoMdClose } from "react-icons/io";
 import { FaCircleCheck } from "react-icons/fa6";
 
 const Form = () => {
-	const [items, setItems] = useState([
-		"Buy groceries",
-		"Walk the dog",
-		"Read a book",
-		"Workout",
-		"Write the journal",
-	]);
-
-	const { toggle, toggleBackgroundColor, backgroundImage } =
-		useContext(MyContext);
-
-	const backgroundColor = toggle ? "#333" : "#fff";
-	const textColor = toggle ? "#fff" : "#25273C";
-	const inputField = toggle
-		? { backgroundColor: "#25273C" }
-		: { backgroundColor: "white" };
-
-	const border = toggle ? "text-red" : "text-blue";
+	const {
+		toggle,
+		toggleBackgroundColor,
+		backgroundImage,
+		backgroundColor,
+		textColor,
+		inputField,
+	} = useContext(MyContext);
 
 	const [formData, setFormData] = useState({ todo: "" });
 	const [checked, setChecked] = useState(false);
 
-	const toggleChecked = () => {
-		setChecked(!checked);
-	};
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
-	};
+	const [items, setItems] = useState([
+		{ id: 1, task: "Buy groceries", checked: false, status: "active" },
+		{ id: 2, task: "Walk the dog", checked: false, status: "active" },
+		{ id: 3, task: "Read a book", checked: false, status: "active" },
+		{ id: 4, task: "Workout", checked: false, status: "active" },
+		{ id: 5, task: "Write the journal", checked: false, status: "active" },
+	]);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const [filter, setFilter] = useState("all");
+
+	const handleInputChange = (e) => {
+		setFormData({ todo: e.target.value });
+	};
+	const handleCheckboxClick = () => {
 		if (formData.todo.trim() !== "") {
-			setItems([...items, formData.todo.trim()]);
+			setItems((prevItems) => [
+				...prevItems,
+				{
+					id: items.length + 1,
+					task: formData.todo.trim(),
+					checked: false,
+					status: "active",
+				},
+			]);
+
 			setFormData({ todo: "" });
+			setChecked(false);
 		}
 	};
 
-	const handleDelete = (index) => {
-		setItems(items.filter((_, i) => i !== index));
+	const handleDelete = (id) => {
+		setItems(items.filter((task) => task.id !== id));
 	};
-	const handleCheckboxChange = (e) => {
-		setChecked(e.target.checked);
+
+	const handleCheckboxChange = (id) => {
+		setItems((prevItems) =>
+			prevItems.map((item) =>
+				item.id === id
+					? {
+							...item,
+							checked: !item.checked,
+							status: item.checked ? "active" : "completed",
+					  }
+					: item
+			)
+		);
 	};
+
+	const clearCompletedTasks = () => {
+		setItems(items.filter((item) => !item.checked));
+	};
+
+	const filteredItems =
+		filter === "all"
+			? items
+			: filter === "active"
+			? items.filter((item) => !item.checked)
+			: items.filter((item) => item.checked);
+
 	return (
 		<div
 			className="min-h-screen flex flex-col items-center"
@@ -68,8 +95,8 @@ const Form = () => {
 				className="w-full h-[200px] md:h-[290px]"
 			></div>
 
-			<div className="flex flex-col w-full items-center -mt-[150px] md:-mt-[200px] px-6 md:px-8">
-				<div className="flex justify-between items-center  text-white w-full max-w-2xl ">
+			<div className="flex flex-col w-full lg:w-[600px] items-center -mt-[150px] md:-mt-[220px] px-6 md:px-8">
+				<div className="flex justify-between pb-4 items-center md:max-w-xl text-white w-full lg:max-w-2xl ">
 					<h2 className="font-bold text-2xl md:text-4xl lg:text-5xl uppercase">
 						T o d o
 					</h2>
@@ -81,72 +108,83 @@ const Form = () => {
 					</button>
 				</div>
 
-				<div className="pt-6 text-sm rounded-lg  lg:max-w-2xl w-full">
-					<form onSubmit={handleSubmit}>
-						<div
-							style={inputField}
-							className="flex items-center space-x-3 px-3 py-2 rounded-md shadow-md"
-						>
-							<label className="relative flex items-center justify-center w-8 h-8">
-								<input
-									type="checkbox"
-									className="absolute opacity-2 w-0 h-0"
-									checked={checked}
-									onChange={handleCheckboxChange}
-								/>
-								<div style={{backgroundColor}}
-									className={`flex items-center justify-center w-6 h-6 rounded-full border cursor-pointer ${
-										checked ? "bg-blue-400 border-gray-400" : "bg-white border-gray-400"
-									}`}
-								>
-									{checked && <FaCircleCheck className="text-blue-500 text-xl" />}
-								</div>
-							</label>
-							<input
-								style={inputField}
-								type="text"
-								id="todo"
-								value={formData.todo}
-								onChange={handleChange}
-								name="todo"
-								placeholder="Create a new Todo..."
-								className="focus:outline-none flex-1 p-2 text-sm sm:text-md"
-							/>
-						</div>
-					</form>
-
+				<div className="pt-6 text-sm rounded-lg md:max-w-xl lg:max-w-2xl w-full">
 					<div
-						className="mt-6 shadow-lg bg-white rounded-md"
+						style={inputField}
+						className="flex items-center space-x-3 px-4 py-2 rounded-md shadow-md md:px-2"
+					>
+						<form >
+
+						
+						<label className="relative flex items-center justify-center w-8 h-8 ">
+							<input
+								style={{ inputField }}
+								type="checkbox"
+								onChange={() => setChecked(!checked)}
+								onClick={handleCheckboxClick}
+								className="absolute opacity-0 w-0 h-0 "
+								checked={checked}
+							/>
+							<div
+								className={`flex items-center justify-center w-6 h-6 rounded-full border cursor-pointer ${
+									checked ? "bg-white" : "border-gray-300"
+								}`}
+							>
+								{checked && (
+									<FaCircleCheck className="text-2xl text-blue-600 " />
+								)}
+							</div>
+						</label>
+						</form>
+						<input
+							style={inputField}
+							type="text"
+							name="todo"
+							onChange={handleInputChange}
+							value={formData.todo}
+							placeholder="Create a new Todo..."
+							className="flex-1 p-2 text-sm focus:outline-none"
+						/>
+					</div>
+					<div
+						className="mt-6 shadow-lg bg-white rounded-md "
 						style={inputField}
 					>
 						<ul className="space-y-1 max-h-60 overflow-y-auto">
-							{items.map((item, index) => (
+							{filteredItems.map((item) => (
 								<li
-									style={{ border }}
-									key={index}
-									className={`flex items-center space-x-6 p-4 ${
+									key={item.id}
+									className={`flex items-center space-x-6 p-4 md:p-2 ${
 										toggle ? "border-b border-gray-700" : "border-b"
 									} relative group`}
 								>
-								<label className="relative flex items-center justify-center w-8 h-8">
-								<input
-									type="checkbox"
-									className="absolute opacity-2 w-0 h-0"
-									checked={checked}
-									onChange={handleCheckboxChange}
-								/>
-								<div style={{backgroundColor}}
-									className={`flex items-center justify-center w-6 h-6 rounded-full border cursor-pointer ${
-										checked ? "bg-blue-400 border-gray-400" : "bg-white border-gray-400"
-									}`}
-								>
-									{checked && <FaCircleCheck className="text-blue-500 text-xl" />}
-								</div>
-							</label>
-
-									<span className="text-sm">{item}</span>
+									<label className="relative flex items-center justify-center w-8 h-8">
+										<input
+											type="checkbox"
+											checked={item.checked}
+											onChange={() => handleCheckboxChange(item.id)}
+											className="absolute opacity-0 w-0 h-0"
+										/>
+										<div
+											style={inputField}
+											className={`flex items-center bg-white justify-center w-6 h-6 rounded-full border cursor-pointer ${
+												item.checked
+													? " text-blue-500 "
+													: "border-gray-300 bg-white "
+											}`}
+										>
+											{item.checked && <FaCircleCheck className="text-2xl" />}
+										</div>
+									</label>
 									<span
-										onClick={() => handleDelete(index)}
+										className={`text-sm ${
+											item.checked ? "line-through text-gray-400" : ""
+										}`}
+									>
+										{item.task}
+									</span>
+									<span
+										onClick={() => handleDelete(item.id)}
 										className="absolute right-4 opacity-50 group-hover:opacity-100 text-gray-500 hover:text-red-500 transition-opacity cursor-pointer"
 									>
 										<IoMdClose className="w-5 h-5 md:w-6 md:h-6" />
@@ -157,27 +195,67 @@ const Form = () => {
 
 						<div className="mt-2 font-semibold text-gray-500 p-4 text-xs w-full flex flex-col sm:flex-row items-center sm:justify-between">
 							<div className="flex justify-between w-full sm:w-auto mb-4 sm:mb-0">
-								<span>{items.length} items left</span>
-								<button className="hover:text-red-400 sm:hidden">
+								<span>
+									{filter === "all" && `${items.length} items left`}
+									{filter === "active" &&
+										`${
+											items.filter((item) => !item.checked).length
+										} active items`}
+									{filter === "completed" &&
+										`${
+											items.filter((item) => item.checked).length
+										} completed items`}
+								</span>
+								<button
+									onClick={clearCompletedTasks}
+									className="hover:text-red-400 sm:hidden"
+								>
 									Clear Completed
 								</button>
 							</div>
 
-							<div className="flex justify-center space-x-4 w-full sm:w-auto">
-								<button className="hover:text-blue-400">All</button>
-								<button className="hover:text-blue-400">Active</button>
-								<button className="hover:text-blue-400">Completed</button>
+							<div className="flex mt-4 justify-center space-x-4 w-full sm:w-auto">
+								<button
+									onClick={() => setFilter("all")}
+									className={`${
+										filter === "all" ? "text-blue-400" : "hover:text-blue-400"
+									}`}
+								>
+									All
+								</button>
+								<button
+									onClick={() => setFilter("active")}
+									className={`${
+										filter === "active"
+											? "text-blue-400"
+											: "hover:text-blue-400"
+									}`}
+								>
+									Active
+								</button>
+								<button
+									onClick={() => setFilter("completed")}
+									className={`${
+										filter === "completed"
+											? "text-blue-400"
+											: "hover:text-blue-400"
+									}`}
+								>
+									Completed
+								</button>
 							</div>
-							<button className="hidden sm:block hover:text-red-400">
+							<button
+								onClick={clearCompletedTasks}
+								className="hidden sm:block hover:text-red-400"
+							>
 								Clear Completed
 							</button>
 						</div>
 					</div>
 				</div>
-
-				<div className="text-gray-500 text-xs mt-6">
-					Drag and drop to reorder list
-				</div>
+				<span className="font-thin text-[10px] italic mt-4">
+					Drag and Drop list items to reorder.
+				</span>
 			</div>
 		</div>
 	);
