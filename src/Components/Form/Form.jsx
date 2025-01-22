@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { IoMdClose } from "react-icons/io";
 import { FaCircleCheck } from "react-icons/fa6";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form = () => {
 	const {
@@ -31,25 +33,46 @@ const Form = () => {
 	const handleInputChange = (e) => {
 		setFormData({ todo: e.target.value });
 	};
-	const handleCheckboxClick = () => {
-		if (formData.todo.trim() !== "") {
-			setItems((prevItems) => [
-				...prevItems,
-				{
-					id: items.length + 1,
-					task: formData.todo.trim(),
-					checked: false,
-					status: "active",
-				},
-			]);
+	const handleSubmit = (e) => {
+		e.preventDefault();
 
-			setFormData({ todo: "" });
-			setChecked(false);
+		if (!checked) {
+			toast.error("You must check the box to add a task!");
+			return;
 		}
+
+		if (formData.todo.trim() === "") {
+			toast.error("Task cannot be empty!");
+			return;
+		}
+
+		if (
+			items.some(
+				(item) => item.task.toLowerCase() === formData.todo.trim().toLowerCase()
+			)
+		) {
+			toast.warning("Task already exists!");
+			return;
+		}
+
+		setItems((prevItems) => [
+			...prevItems,
+			{
+				id: items.length + 1,
+				task: formData.todo.trim(),
+				checked: false,
+				status: "active",
+			},
+		]);
+
+		toast.success("Task added successfully!!!");
+		setFormData({ todo: "" });
+		setChecked(false);
 	};
 
 	const handleDelete = (id) => {
 		setItems(items.filter((task) => task.id !== id));
+		toast.info("Task deleted!");
 	};
 
 	const handleCheckboxChange = (id) => {
@@ -59,17 +82,33 @@ const Form = () => {
 					? {
 							...item,
 							checked: !item.checked,
-							status: item.checked ? "active" : "completed",
+							status: item.checked ? "completed" : "active",
 					  }
 					: item
 			)
 		);
+		console.log(id);
+		const task = items.find((item) => item.id === id);
+		toast.success(task.checked ? "Marked as active!" : "Marked as completed!");
 	};
 
 	const clearCompletedTasks = () => {
-		setItems(items.filter((item) => !item.checked));
+		const completedTasks = items.filter((item) => item.checked);
+		if (completedTasks.length === 0) {
+			toast.info("No completed tasks to clear.");
+		} else {
+			setItems(items.filter((item) => !item.checked));
+			toast.success("Cleared all completed tasks!");
+		}
 	};
-
+	const handleFilterChange = (newFilter) => {
+		setFilter(newFilter);
+		const filterMessages = {
+			all: "Showing all tasks.",
+			active: "Showing active tasks.",
+		};
+		toast.info(filterMessages[newFilter]);
+	};
 	const filteredItems =
 		filter === "all"
 			? items
@@ -113,28 +152,25 @@ const Form = () => {
 						style={inputField}
 						className="flex items-center space-x-3 px-4 py-2 rounded-md shadow-md md:px-2"
 					>
-						<form >
-
-						
-						<label className="relative flex items-center justify-center w-8 h-8 ">
-							<input
-								style={{ inputField }}
-								type="checkbox"
-								onChange={() => setChecked(!checked)}
-								onClick={handleCheckboxClick}
-								className="absolute opacity-0 w-0 h-0 "
-								checked={checked}
-							/>
-							<div
-								className={`flex items-center justify-center w-6 h-6 rounded-full border cursor-pointer ${
-									checked ? "bg-white" : "border-gray-300"
-								}`}
-							>
-								{checked && (
-									<FaCircleCheck className="text-2xl text-blue-600 " />
-								)}
-							</div>
-						</label>
+						<form>
+							<label className="relative flex items-center justify-center w-8 h-8 ">
+								<input
+									style={{ inputField }}
+									type="checkbox"
+									onChange={() => setChecked(!checked)}
+									className="absolute opacity-0 w-0 h-0 "
+									checked={checked}
+								/>
+								<div
+									className={`flex items-center justify-center w-6 h-6 rounded-full border cursor-pointer ${
+										checked ? "bg-white" : "border-gray-300"
+									}`}
+								>
+									{checked && (
+										<FaCircleCheck className="text-2xl text-blue-600 " />
+									)}
+								</div>
+							</label>
 						</form>
 						<input
 							style={inputField}
@@ -143,6 +179,11 @@ const Form = () => {
 							onChange={handleInputChange}
 							value={formData.todo}
 							placeholder="Create a new Todo..."
+							onKeyDown={(e) => {
+								if (e.key === "Enter") {
+									handleSubmit(e);
+								}
+							}}
 							className="flex-1 p-2 text-sm focus:outline-none"
 						/>
 					</div>
@@ -193,7 +234,7 @@ const Form = () => {
 							))}
 						</ul>
 
-						<div className="mt-2 font-semibold text-gray-500 p-4 text-xs w-full flex flex-col sm:flex-row items-center sm:justify-between">
+						<div className="mt-4 font-semibold text-gray-500 p-4 text-xs w-full flex flex-col sm:flex-row items-center sm:justify-between">
 							<div className="flex justify-between w-full sm:w-auto mb-4 sm:mb-0">
 								<span>
 									{filter === "all" && `${items.length} items left`}
@@ -214,9 +255,9 @@ const Form = () => {
 								</button>
 							</div>
 
-							<div className="flex mt-4 justify-center space-x-4 w-full sm:w-auto">
+							<div className="flex  justify-center space-x-4 w-full lg:w-auto">
 								<button
-									onClick={() => setFilter("all")}
+									onClick={() => handleFilterChange("all")}
 									className={`${
 										filter === "all" ? "text-blue-400" : "hover:text-blue-400"
 									}`}
@@ -224,7 +265,7 @@ const Form = () => {
 									All
 								</button>
 								<button
-									onClick={() => setFilter("active")}
+									onClick={() => handleFilterChange("active")}
 									className={`${
 										filter === "active"
 											? "text-blue-400"
@@ -234,7 +275,7 @@ const Form = () => {
 									Active
 								</button>
 								<button
-									onClick={() => setFilter("completed")}
+									onClick={() => handleFilterChange("completed")}
 									className={`${
 										filter === "completed"
 											? "text-blue-400"
@@ -257,6 +298,18 @@ const Form = () => {
 					Drag and Drop list items to reorder.
 				</span>
 			</div>
+			<ToastContainer
+				position="top-center"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 		</div>
 	);
 };
