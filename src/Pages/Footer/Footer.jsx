@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="mt-8 bg-[#191A23] lg:rounded-t-4xl text-white py-8 px-6">
-      <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-6 md:space-y-8 px-6 md:px-12 lg:px-16">
-        <div className="w-full lg:flex lg:justify-between lg:items-center">
-          <div className="flex items-center justify-center text-2xl md:text-3xl font-semibold space-x-2">
+    <footer className="mt-8  lg:rounded-t-4xl text-white py-8 lg:px-40">
+      <div className=" lg:p-6 lg:rounded-t-[60px] bg-[#191A23]  flex flex-col items-center text-center space-y-6 md:space-y-8 px-6 md:px-12 lg:px-16">
+        <div className="w-full lg:flex lg:justify-between lg:items-center ">
+          <div className="flex mt-10 items-center justify-center text-2xl md:text-3xl font-semibold space-x-2">
             <FaStar />
-            <Link to="/" className="hover:text-gray-300">
+            <Link to="/" className="hover:text-gray-300 lg:text-4xl">
               Positivus
             </Link>
           </div>
 
-          <ul className="flex flex-col lg:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 text-md">
+          <ul className="flex flex-col lg:flex-row items-center  space-y-4 mt-6 md:space-y-0 md:space-x-8 text-md lg:text-xl">
             <li>
               <Link to="/about" className="hover:text-gray-300">
                 About Us
@@ -57,7 +57,7 @@ const Footer = () => {
 
         <div className="w-full lg:flex lg:space-x-60 mt-6 lg:mt-10 lg:text-xl">
           <div className="text-center lg:text-lg  lg:text-start text-sm md:text-base space-y-2">
-            <p className="bg-[#B9FF66] text-black inline-block font-semibold rounded-sm px-2 py-1">
+            <p className="bg-[#B9FF66] text-black inline-block font-semibold rounded-sm  py-1">
               Contact us:
             </p>
             <p>Email: info@positivus.communication</p>
@@ -66,22 +66,17 @@ const Footer = () => {
             <p> Moonstone City, Stardust State 12345</p>
           </div>
 
-          <div className="w-full max-w-xl mt-6 lg:mt-0">
-            <form className="bg-[#292A32] lg:h-40 lg:flex lg:flex-row lg:items-center lg:justify-center p-6 lg:gap-4 rounded-lg text-white flex flex-col space-y-4">
-              <input
-                id="email"
-                type="email"
-                placeholder="Email"
-                className="p-3 lg:p-4 border text-white border-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-
-              <button
-                type="submit"
-                className="bg-[#B9FF66] lg:px-8 lg:py-4 hover:bg-green-400 text-black font-semibold lg:text-xl py-3 rounded-md transition"
-              >
-                Subscribe to news
-              </button>
-            </form>
+          <div className="w-full lg:h-40 bg-[#292A32] rounded-2xl lg:flex lg:justify-center lg:items-center">
+          <form className="flex flex-col  lg:flex-row gap-4 mt-10 p-5 lg:w-full">
+          <input
+            type="email"
+            placeholder="Email"
+            className="p-3 rounded-xl border border-white text-black"
+          />
+          <button type="submit" className="bg-[#B9FF66] px-5 py-3 lg:px-10 rounded-xl lg:w-60 text-sm font-semibold text-black lg:text-lg">
+            Subscribe to news
+          </button>
+        </form>
           </div>
         </div>
 

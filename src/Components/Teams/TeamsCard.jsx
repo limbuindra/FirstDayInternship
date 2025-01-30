@@ -12,7 +12,7 @@ const TeamsCard = ({ photo, name, designation, work }) => {
 					</h2>
 					<p className="text-sm text-gray-700 lg:text-lg">{designation}</p>
 				</div>
-				<img src="src/assets/Social.png" className="lg:-mt-[70px] -mt-[70px]" />
+				<img src="src/assets/Social.png" className="lg:-mt-[40px] -mt-[70px]" />
 			</div>
 
 			<hr className="my-4 border border-slate-900" />

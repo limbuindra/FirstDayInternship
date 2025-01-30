@@ -10,7 +10,7 @@ const ProcessCard = ({ id, title, content }) => {
 	return (
         <>
 		  <div
-      className={`w-full p-6 lg:p-14 border border-gray-600 ${
+      className={`w-full p-6 lg:p-12 border border-gray-600 ${
         isVisible ? "bg-[#B9FF66]" : "bg-[#f3f3f3]"
       } border-b-6 border-b-gray-900 rounded-4xl transition-all duration-200`}
     >

@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { PiStarFourFill } from "react-icons/pi";
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
 
   return (
-    <div
+    <FaArrowRight
       className={className}
-      style={{ ...style, display: "block" ,top:"90%",right:"25%"}}
+      style={{
+        ...style,
+        display: "block",
+        color: "white",
+        zIndex: 100,
+        right: window.innerWidth < 768 ? "10%" : "32%",
+        right: "10%", 
+      }}
       onClick={onClick}
     />
   );
@@ -18,57 +27,63 @@ function SampleNextArrow(props) {
 function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
-    <div
+    <FaArrowLeft
       className={className}
       style={{
         ...style,
         display: "block",
         zIndex: 100,
-        top: "100%",
-        left: "25%",
+        top: "135%",
+        left: window.innerWidth < 768 ? "10%" : "32%",
+        color: "white",
       }}
       onClick={onClick}
-    ></div>
+    />
   );
 }
 
+const testimonialsData = [
+  {
+    id: 1,
+    quote:
+      "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads. The team is professional, responsive, and truly cares about the success of our business.",
+    name: "John Smith",
+    title: "Marketing Director at XYZ Corp",
+  },
+  {
+    id: 2,
+    quote:
+      "Positivus has completely transformed the way we approach digital marketing. Their expertise and dedication are unmatched.",
+    name: "Sarah Smith",
+    title: "CEO at Bright Marketing",
+  },
+  {
+    id: 3,
+    quote:
+      "The results speak for themselves. Our brand visibility and customer engagement have skyrocketed thanks to Positivus.",
+    name: "Emily Davis",
+    title: "Head of Digital Strategy at ABC Ltd.",
+  },
+  {
+    id: 4,
+    quote:
+      "I am amazed at the results Positivus has delivered. Our ROI has significantly improved, and we are thrilled with the partnership.",
+    name: "Michael Brown",
+    title: "Business Owner at LocalTech Solutions",
+  },
+];
+
 const Sliders = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const slider = [
-    {
-      id: 1,
-      text: "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.",
-    },
-    {
-      id: 2,
-      text: "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.",
-    },
-    {
-      id: 3,
-      text: "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.",
-    },
-    {
-      id: 4,
-      text: "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.",
-    },
-    {
-      id: 5,
-      text: "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.",
-    },
-    {
-      id: 6,
-      text: "We have been working with Positivus for the past year and have seen a significant increase in website traffic and leads as a result of their efforts. The team is professional, responsive, and truly cares about the success of our business. We highly recommend Positivus to any company looking to grow their online presence.",
-    },
-  ];
+
   const settings = {
     customPaging: function (i) {
-      console.log("IIIII", i);
       return (
-        <div
-          className={`h-[10px] w-[10px] ${
-            i == activeIndex ? "bg-red-200" : "bg-gray-400"
+        <PiStarFourFill
+          className={`h-[34px] mt-[110px] w-[24px] rotate-45 ${
+            i == activeIndex ? "text-[#B9FF66]" : "text-gray-200"
           }`}
-        ></div>
+        />
       );
     },
     dotsClass: "slick-dots slick-thumb",
@@ -78,41 +93,51 @@ const Sliders = () => {
     slidesToScroll: 1,
     className: "center",
     centerMode: true,
-    centerPadding: "260px",
+    centerPadding: window.innerWidth < 768 ? "0px" : "370px",
     slidesToShow: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     afterChange: (index) => setActiveIndex(index),
+    // responsive: [
+    //   {
+    //     breakpoint: 768, 
+    //     settings: {
+    //       centerPadding: "4px",
+    //       slidesToShow:1, 
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 378, 
+    //     settings: {
+    //       centerPadding: "10px", 
+    //     },
+    //   },
+    // ],
   };
 
   return (
-    <div className="w-[625px] h-[625px] pt-10">
+    <section className=" lg:h-[635px] h-[635px] rounded-4xl justify-center lg:rounded-4xl  bg-gray-950 px- py-10">
+      <div className="w-full max-w-7xl">
+        <Slider {...settings} className="text-white  rounded-lg">
+          {testimonialsData.map((testimonial) => (
+            <div key={testimonial.id} className=" lg:mt-10">
+              <div className="relative  md:w-96 text-white p-10 rounded-xl lg:p-10  w-80  border border-lime-400 text-center">
+                <p className="text-lg font-light">{testimonial.quote}</p>
+                <div className="absolute -bottom-3 left-10 w-6 h-6 bg-gray-950 -rotate-45 border-l border-b border-lime-400" />
+              </div>
 
-      <div className="pt-10 flex justify-center w-[1240px]">
-        <div className="bg-white rounded-4xl p-6 w-[1240px] ">
-          <div className="">
-            <Slider {...settings} className="bg-[#191A23] text-white p-6">
-              {slider.map((item) => (
-                <div key={item.id} className="">
-                  <div className="w-[550px] h-[190x] p-6 border-3 border-[#B9FF66] rounded-4xl overflow-hidden relative top-1.5">
-                    {item.text}
-                  </div>
-
-                  <div className="h-[20px] w-[200px] flex gap-6.5 pl-18  relative ">
-                    <div className=" bg-[#B9FF66] h-10 w-0.5 rotate-135"></div>
-                    <div className=" bg-[#B9FF66] h-10 w-0.5  rotate-45"></div>
-                  </div>
-                  <div className="pl-23 ">
-                    <p className="text-[#B9FF66] mt-4">John Smith</p>
-                    <p className="text-white">Marketing Director at XYZ Corp</p>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
+              <div className="mt-4 text-center">
+                <p className="text-lime-400 font-bold text-lg">
+                  {testimonial.name}
+                </p>
+                <p className="text-gray-400 text-sm">{testimonial.title}</p>
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
-    </div>
+    </section>
   );
 };
+
 export default Sliders;
