@@ -14,7 +14,7 @@ const Navbar = () => {
 		<>
 			<nav className="bg-white ">
 				<div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-4">
-					<div className="flex items-center text-xl space-x-2 lg:space-x-2 lg:text-4xl text-gray-800">
+					<div className="flex items-center text-xl space-x-2 lg:space-x-2 lg:text-5xl text-gray-800">
 						<FaStar />
 						<Link to="/" className="hover:text-gray-900  font-semibold">
 							Positivus

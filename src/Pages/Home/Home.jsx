@@ -1,88 +1,91 @@
 import React from "react";
 import Card from "../../Components/Card/Card";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import { Data, Process, Teams } from "../../data/data";
+import { Data, Process, Teams, caseStudies } from "../../data/data";
 import ProcessCard from "../../Components/ProcessCards/ProcessCard";
 import TeamsCard from "../../Components/Teams/TeamsCard";
+// import Carousel from "../../Components/Slider/Carousel";
+import Sliders from "../../Components/Slider/Sliders";
 
 const Home = () => {
 	const logos = ["Vector", "dribble", "hubspot", "netflix", "notion", "zoom"];
-	const caseStudies = [
-		{
-			content:
-				"For a local restaurant, we implemented a targeted PPC campaign that resulted in a 50% increase in website traffic and a 25% increase in sales.",
-		},
-		{
-			content:
-				"For a B2B software company, we developed an SEO strategy that resulted in a first page ranking for key keywords and a 200% increase in organic traffic.",
-		},
-		{
-			content:
-				"For a national retail chain, we created a social media marketing campaign that increased followers by 25% and generated a 20% increase in online sales.",
-		},
-	];
+
 	return (
-		<div className=" p-6 flex items-center justify-center flex-col lg:px-34 lg:justify-center lg:mt-12">
-			<div className="grid lg:grid-cols-2 gap-8 items-center max-w-screen-xl mx-auto">
-				<div className="order-1">
-					<div className="text-4xl font-medium lg:text-6xl">
-						<p className="space-y-5">
-							<span className="lg:block">Navigating the </span>
-							<span className="lg:block">digital landscape </span>
-							<span className="lg:block">for success</span>
-						</p>
+		<div className="w-full">
+			{/* Hero Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8 lg:mt-10">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+					<div className="order-1">
+						<div className="text-3xl font-medium lg:text-6xl text-center lg:text-left">
+							<p className="space-y-3">
+								<span className="block">Navigating the </span>
+								<span className="block">digital landscape </span>
+								<span className="block">for success</span>
+							</p>
+						</div>
+						<div className="lg:hidden mt-6">
+							<img
+								src="src/assets/illustration.png"
+								alt="Digital Illustration"
+								className="w-full"
+							/>
+						</div>
+						<div className="mt-4 text-sm lg:text-xl lg:mt-9 text-center lg:text-left">
+							<p>
+								Our digital marketing agency helps businesses <br /> grow and
+								succeed online with a range of <br /> services including SEO,
+								PPC, social media marketing, <br /> and content creation.
+							</p>
+						</div>
+						<div className="mt-4 flex justify-center lg:justify-start">
+							<button className="bg-[#191A23] text-white px-6 py-2 rounded-xl lg:mt-6 lg:text-xl lg:py-4 lg:px-10 w-full lg:w-auto">
+								Book a consultation
+							</button>
+						</div>
 					</div>
-					<div className="lg:hidden mt-3 ">
+
+					<div className="hidden lg:block order-2 lg:order-2 lg:mt-6 lg:w-[600px]">
 						<img
 							src="src/assets/illustration.png"
 							alt="Digital Illustration"
 							className="w-full"
 						/>
 					</div>
-					<div className="mt-6 lg:text-xl lg:mt-9">
-						<p>
-							Our digital marketing agency helps businesses <br />
-							grow and succeed online with a range of <br /> services including
-							SEO, PPC, social media marketing, <br />
-							and content creation.
-						</p>
-					</div>
-					<div className="mt-6">
-						<button className="bg-[#191A23] text-white px-20 py-4 rounded-xl lg:mt-6 lg:text-xl lg:py-6 lg:px-10">
-							Book a consultation
-						</button>
-					</div>
-				</div>
-
-				<div className="hidden lg:block order-2 lg:order-2 lg:w-[600px] w-[300px]">
-					<img
-						src="src/assets/illustration.png"
-						alt="Digital Illustration"
-						className="w-full"
-					/>
 				</div>
 			</div>
 
-			<div className="flex flex-wrap mt-24 justify-center lg:gap-22 items-center gap-5">
-				{logos.map((logo) => (
-					<div key={logo}>
-						<img src={`src/assets/${logo}.png`} alt={logo} />
-					</div>
-				))}
+			{/* Logos Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
+				<div className="flex flex-wrap mt-12 justify-center lg:gap-24 items-center gap-4">
+					{logos.map((logo) => (
+						<div key={logo}>
+							<img
+								src={`src/assets/${logo}.png`}
+								alt={logo}
+								className="w-16 lg:w-30"
+							/>
+						</div>
+					))}
+				</div>
 			</div>
 
-			<div className="mt-10 text-center justify-center rounded-xl lg:flex lg:gap-8 lg:mt-36 max-w-screen-xl mx-auto">
-				<h1 className="text-4xl lg:py-1 bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold lg:text-5xl inline-block text-center">
-					Services
-				</h1>
-				<p className="text-center mt-6 text-sm lg:mt-0 lg:text-xl ">
-					At our digital marketing agency, we offer a range of services to help
-					businesses grow and succeed online. These services include:
-				</p>
+			{/* Services Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8 lg:">
+				<div className="mt-8 text-center justify-center rounded-xl lg:flex lg:justify-start lg:gap-8 lg:mt-36">
+					<h1 className="text-2xl lg:text-4xl bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold inline-block">
+						Services
+					</h1>
+					<p className="text-center mt-4 text-sm lg:mt-0 lg:text-xl">
+						At our digital marketing agency, we offer a range of services to{" "}
+						<br /> help businesses grow and succeed online. These services
+						include:
+					</p>
+				</div>
 			</div>
 
-			<div className="container mx-auto mt-10 px-4 lg:px-0">
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+			{/* Cards Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8 lg:mt-24">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mt-8">
 					{Data.map((item, index) => (
 						<Card
 							key={index}
@@ -96,6 +99,7 @@ const Home = () => {
 				</div>
 			</div>
 
+			{/* CTA Section */}
 			<div className="rounded-4xl mt-10 p-10 lg:flex lg:w-full lg:h-[350px] bg-[#f3f3f3] lg:items-center lg:justify-between lg:mt-30">
 				<div className="mt-4 lg:p-6 lg:space-y-6 ">
 					<h3 className="text-lg font-semibold text-gray-800 lg:text-3xl ">
@@ -115,22 +119,23 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div>
-				<div className="mt-10 text-center justify-center lg:justify-start rounded-xl lg:flex lg:gap-8 lg:mt-36 max-w-screen-xl mx-auto">
-					<h1 className="text-4xl lg:py-1 bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold lg:text-5xl inline-block text-center">
+			{/* Case Studies Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
+				<div className="mt-8 text-center justify-center lg:justify-start rounded-xl lg:flex lg:gap-8 lg:mt-36">
+					<h1 className="text-2xl lg:text-4xl bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold inline-block">
 						Case Studies
 					</h1>
-					<p className="text-center mt-6 text-sm lg:mt-0 lg:text-xl ">
-						Explore Real-Life Examples of Our Proven Digital Marketing <br />
-						Success through Our Case Studies
+					<p className="text-center mt-4 text-sm lg:mt-0 lg:text-xl">
+						Explore Real-Life Examples of Our Proven Digital Marketing Success
+						through Our Case Studies
 					</p>
 				</div>
-				<section className="max-w-screen rounded-4xl p-4 text-white mt-6 lg:mt-20 lg:bg-[#191A23]">
+				<section className="w-full rounded-2xl p-4 text-white mt-6 lg:mt-20 lg:bg-[#191A23]">
 					<div className="flex lg:flex-row lg:gap-0 gap-4 overflow-x-auto scroll-smooth scrollbar-hide lg:divide-x lg:divide-white">
 						{caseStudies.map((item, index) => (
 							<div
 								key={index}
-								className={`min-w-[80%] lg:min-w-0 lg:flex-1 lg:text-xl p-4 lg:p-20 bg-[#191A23] rounded-4xl lg:rounded-none`}
+								className={`min-w-[80%] lg:min-w-0 lg:flex-1 lg:text-xl p-4 lg:p-20 bg-[#191A23] rounded-2xl lg:rounded-none`}
 							>
 								<p>{item.content}</p>
 								<div className="mt-4 flex items-center gap-2 cursor-pointer text-[#B9FF66]">
@@ -141,21 +146,25 @@ const Home = () => {
 						))}
 					</div>
 				</section>
+			</div>
 
+			{/* Process Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
 				<section>
-					<div className="mt-10 text-center justify-center rounded-xl lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-36 max-w-screen">
-						<h1 className="text-3xl  bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold lg:text-4xl inline-block ">
+					<div className="mt-8 text-center justify-center rounded-xl lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-36">
+						<h1 className="text-2xl lg:text-4xl bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold inline-block">
 							Our Working Process
 						</h1>
-						<p className="text-center mt-6 text-sm lg:mt-0 lg:text-xl ">
+						<p className="text-center mt-4 text-sm lg:mt-0 lg:text-xl">
 							Step-by-Step Guide to Achieving Your Business Goals
 						</p>
 					</div>
 				</section>
 
+				{/* Process Cards Section */}
 				<section className="process">
-					<div className="container mx-auto mt-10 px-4 lg:px-0">
-						<div className="grid grid-cols-1 lg:grid-cols-1 gap-8 lg:gap-12">
+					<div className="mt-8">
+						<div className="grid grid-cols-1 lg:grid-cols-1 gap-6 lg:gap-12">
 							{Process.map((item, index) => (
 								<ProcessCard
 									key={index}
@@ -167,19 +176,23 @@ const Home = () => {
 						</div>
 					</div>
 				</section>
+			</div>
+
+			{/* Team Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
 				<section className="team">
-					<div className="mt-10 text-center justify-center rounded-xl lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-36 max-w-screen">
-						<h1 className="text-3xl  bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold lg:text-4xl inline-block ">
+					<div className="mt-8 text-center justify-center rounded-xl lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-36">
+						<h1 className="text-2xl lg:text-4xl bg-[#B9FF66] py-1 px-2 rounded-xl lg:font-semibold inline-block">
 							Team
 						</h1>
-						<p className="text-center mt-6 text-sm lg:mt-0 lg:text-xl ">
+						<p className="text-center mt-4 text-sm lg:mt-0 lg:text-xl">
 							Meet the skilled and experienced team behind our successful
 							digital marketing strategies
 						</p>
 					</div>
 
-					<div className="container lg:mt-18 mx-auto mt-4 lg:px-0 p-4">
-						<div className="flex flex-wrap gap-8">
+					<div className="lg:mt-18 mt-4">
+						<div className="flex flex-wrap gap-6">
 							{Teams.map((item, index) => (
 								<TeamsCard
 									key={index}
@@ -191,35 +204,107 @@ const Home = () => {
 								/>
 							))}
 						</div>
-						<div className="bg-[#191A23] m-6 text-white px-20 text-center py-4 rounded-xl lg:mt-10 lg:text-xl lg:py-5  lg:px-16 lg:w-[269px] lg:ml-auto">
+						<div className="bg-[#191A23] m-4 text-white px-6 py-3 rounded-xl lg:mt-10 lg:text-xl lg:py-5 lg:px-16 lg:w-[269px] lg:ml-auto">
 							<button>See all Team</button>
 						</div>
 					</div>
 				</section>
+			</div>
+
+			{/* Testimonials Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
 				<section>
-					<div className="mt-10 text-center justify-center rounded-xl lg:space-x-2 lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-16 max-w-screen">
-						<h2 className="text-3xl  bg-[#B9FF66] lg:px-2 lg:py-2  px-1 rounded-xl lg:font-medium lg:text-4xl inline-block ">
+					<div className="mt-8 text-center justify-center rounded-xl lg:space-x-2 lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-16">
+						<h2 className="text-2xl lg:text-4xl bg-[#B9FF66] lg:px-2 lg:py-2 px-1 rounded-xl lg:font-medium inline-block">
 							Testimonials
 						</h2>
-						<p className="text-center mt-6 text-sm lg:mt-0 lg:text-xl ">
-							Hear from Our Satisfied Clients: Read Our Testimonials <br />
-							to Learn More about Our Digital Marketing Services
+						<p className="text-center mt-4 text-sm lg:mt-0 lg:text-xl">
+							Hear from Our Satisfied Clients: Read Our Testimonials to Learn
+							More about Our Digital Marketing Services
 						</p>
 					</div>
 				</section>
+
+				{/* Carousel Section */}
 				<section>
-					<div className="m-4 rounded-4xl mt-10 p-10 lg:flex lg:w-full lg:h-[350px] bg-[#191A23] lg:items-center lg:justify-between lg:mt-20">
-						<div className=""></div>
-					</div>
+					{/* <Carousel /> */}
+					<Sliders />
 				</section>
-				<section>
-					<div className="mt-10 text-center justify-center rounded-xl lg:space-x-2 lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-16 max-w-screen">
-						<h2 className="text-3xl  bg-[#B9FF66] lg:px-2 lg:py-2  px-1 rounded-xl lg:font-medium lg:text-4xl inline-block ">
-							Contact Us
-						</h2>
-						<p className="text-center mt-6 text-sm lg:mt-0 lg:text-xl ">
-							Connect with Us: Let's Discuss Your Digital Marketing Needs
-						</p>
+			</div>
+
+			{/* Contact Section */}
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
+				<section className="m-4">
+					<div className="bg-white h-fit p-4 pt-20 ">
+						<div className="flex flex-row gap-3 ">
+							<p className="bg-[#B9FF66] inline-block p-1 font-bold text-2xl rounded-lg ">
+								Contact Us
+							</p>
+							<p className=" w-[323px] ">
+								Connect with Us: Let's Discuss Your Digital Marketing Needs
+							</p>
+						</div>
+						<div className="pt-[50px] ">
+							<div className="flex flex-row lg:flex-row bg-[#F3F3F3] relative max-w-[1240px] m-auto rounded-4xl  overflow-hidden">
+								<div className="flex flex-col flex-1 p-6 lg:p-10 gap-2 ">
+									<div className="max-w-[556px] flex flex-col">
+										<div className="flex gap-2 ">
+											<input type="radio" name="action" />
+
+											<label className="">Say Hi</label>
+
+											<input
+												type="radio"
+												name="action"
+												className=" checked:bg-[#B9FF66]"
+											/>
+											<label>Get a Quote</label>
+										</div>
+
+										<label htmlFor="name" className="pt-6 ">
+											Name
+										</label>
+										<input
+											id="name"
+											type="text"
+											placeholder="Name"
+											className="p-3 border-1 border-black rounded-xl"
+										/>
+										<label htmlFor="email" className=" pt-3">
+											Email*
+										</label>
+										<input
+											id="email"
+											type="email"
+											placeholder="Email"
+											className="p-3 border border-black rounded-xl"
+										/>
+										<label htmlFor="message" className=" pt-3">
+											Message*
+										</label>
+										<textarea
+											id="message"
+											placeholder="Message"
+											className="p-3 border border-black rounded-xl h-32 resize-none"
+										></textarea>
+										<button className=" hidden justify-center items-center md:flex mt-[40px] bg-[#191A23] text-white  rounded-xl hover:bg-[#333] transition p-4">
+											Send Message
+										</button>
+									</div>
+								</div>
+
+								<div className="hidden lg:flex  justify-center items-center">
+									<img
+										src="src/assets/star.png"
+										alt="Contact Us"
+										className="w-[491px] h-[648] absolute right-[-3/2]"
+									/>
+								</div>
+							</div>
+							<button className="md:hidden w-full mx-auto  mt-4 bg-[#191A23] text-white py-2 px-4 rounded-xl hover:bg-[#333] transition pt-6 pb-4">
+								Send Message
+							</button>
+						</div>
 					</div>
 				</section>
 			</div>

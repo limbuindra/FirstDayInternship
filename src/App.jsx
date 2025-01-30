@@ -7,6 +7,7 @@ import UseCases from "./Pages/UseCases/useCases";
 import Pricing from "./Pages/Pricing/Pricing";
 import Blog from "./Pages/blog/Blog";
 import Navbar from "./Pages/Layout/Navbar";
+import Footer from "./Pages/Footer/Footer";
 
 const App = () => {
 	return (
@@ -20,6 +21,7 @@ const App = () => {
 					<Route path="/pricing" element={<Pricing />} />
 					<Route path="/blog" element={<Blog />} />
 			</Routes>
+			<Footer/>
 		</>
 	);
 };
