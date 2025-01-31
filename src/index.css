@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  /* font-optical-sizing: auto; */
+  /* font-weight: 200;  */
+   /* font-style: normal; */
+}
+input[type="radio"]:checked {
+    accent-color: lime; 
+  }
+  
+  input[type="radio"]:checked + label {
+    color: lime; /* Changes the label text color to green when the radio button is selected */
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .animate-marquee {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+  }

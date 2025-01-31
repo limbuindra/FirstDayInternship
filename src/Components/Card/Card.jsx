@@ -1,19 +1,19 @@
 import React from "react";
 import { MdOutlineArrowOutward } from "react-icons/md";
 
-const Card = ({ image, title, btnClr, cardBgClr,textClr }) => {
+const Card = ({ image, title, btnClr, cardBgClr,textClr,textbg,Clr }) => {
 	return (
 		<div
 			style={{ backgroundColor: cardBgClr }}
 			className="w-full  p-6 lg:p-12 border border-gray-600 bg-[#f3f3f3] border-b-6 border-b-gray-900 rounded-4xl lg:w-[600px] lg:h-[310px] "
 		>
-			<h2 className="text-lg font-semibold bg-[#B9FF66] inline-block rounded-sm lg:text-3xl">
+			<h2 style={{backgroundColor: textbg }} className="text-lg font-semibold  inline-block lg:inline-block rounded-sm lg:text-3xl">
 				{title}
 			</h2>
 			<div className="flex justify-between items-center mt-4">
 				<div className="mt-12 w-full  flex items-center lg:flex lg:items-center lg:gap-4">
 					<button
-						style={{ backgroundColor: btnClr, color:textClr }}
+						style={{ backgroundColor: btnClr, color:textClr,color:Clr }}
 						className="mt-4 cursor-pointer border p-1 text-xl text-white rounded-4xl hover:bg-gray-600 focus:outline-none lg:text-4xl"
 					>
 						<MdOutlineArrowOutward />

@@ -12,11 +12,11 @@ const Navbar = () => {
 
   return (
 		<>
-			<nav className="bg-white ">
-				<div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-4">
-					<div className="flex items-center text-xl space-x-2 lg:space-x-2 lg:text-5xl text-gray-800">
-						<FaStar />
-						<Link to="/" className="hover:text-gray-900  font-semibold">
+			<nav className="max-w-screen mx-auto bg-white lg:p-4 lg:sticky lg:top-0  sticky top-0 z-50 lg:z-50">
+				<div className="container mx-auto flex h-20 items-center justify-between lg:justify-evenly lg:space-x-38 px-4 lg:px-6">
+					<div className="flex items-center text-xl space-x-2 lg:space-x-2 lg:text-4xl  lg:font-semibold text-black">
+						<FaStar  />
+						<Link to="/" className=" font-bold">
 							Positivus
 						</Link>
 					</div>
@@ -32,7 +32,7 @@ const Navbar = () => {
 					</div>
 
 					<div className="hidden lg:flex items-center lg:text-xl lg:space-x-10">
-						<ul className="flex space-x-6 lg:space-x-14 text-gray-700">
+						<ul className="flex space-x-6 lg:space-x-14 text-gray-700 lg:text-black">
 							<li>
 								<Link to="/about" className="hover:text-gray-900">
 									About us
@@ -59,8 +59,8 @@ const Navbar = () => {
 								</Link>
 							</li>
 						</ul>
-						<div className="border p-2 px-4 rounded-lg lg:px-9 lg:py-4">
-							<button className="text-gray-700 hover:text-gray-900">
+						<div className="border p-2 px-4 rounded-xl lg:rounded-2xl lg:px-9 lg:py-5">
+							<button className="text-gray-700 lg:text-black hover:text-gray-900">
 								Request a Quote
 							</button>
 						</div>
@@ -68,12 +68,12 @@ const Navbar = () => {
 				</div>
 
 				<div
-					className={`lg:hidden fixed top-0 left-0 z-50 w-64 bg-white h-full shadow-lg transform transition-transform duration-300 ease-in-out ${
+					className={`lg:hidden fixed top-0 left-0 z-50 w-55 bg-white h-full shadow-lg transform transition-transform duration-300 ease-in-out ${
 						isMenuOpen ? "translate-x-0" : "-translate-x-full"
 					}`}
 				>
-					<div className="p-6">
-						<ul className="space-y-6 text-gray-700">
+					<div className="p-8 font-bold text-lg">
+						<ul className="space-y-6  ">
 							<li>
 								<Link
 									to="/about"
@@ -123,10 +123,9 @@ const Navbar = () => {
 					</div>
 				</div>
 
-				{/* Overlay */}
 				{isMenuOpen && (
 					<div
-						className="fixed inset-0 z-40 bg-black opacity-50"
+						className="fixed inset-0 z-40 bg-black opacity-40"
 						onClick={() => setMenuOpen(false)}
 					></div>
 				)}

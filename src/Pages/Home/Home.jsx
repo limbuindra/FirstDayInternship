@@ -1,29 +1,54 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Card from "../../Components/Card/Card";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { Data, Process, Teams, caseStudies } from "../../data/data";
 import ProcessCard from "../../Components/ProcessCards/ProcessCard";
 import TeamsCard from "../../Components/Teams/TeamsCard";
 import Sliders from "../../Components/Slider/Sliders";
+import emailjs from "@emailjs/browser";
 
 const Home = () => {
 	const logos = ["Vector", "dribble", "hubspot", "netflix", "notion", "zoom"];
 
+	const form = useRef();
+
+	const sendEmail = (e) => {
+		e.preventDefault();
+
+		emailjs
+			.sendForm(
+				"service_709elus",
+				"template_vb4bm0d",
+				form.current,
+				"Fk2k-gsv7OdxRA3rM"
+			)
+			.then(
+				(result) => {
+					console.log("Email sent successfully", result.text);
+					alert("Email Sent successfully!!!");
+				},
+				(error) => {
+					console.log("Failed to send email", error.text);
+				}
+			);
+
+		e.target.reset();
+	};
 	return (
-		<div className="">
-			<div className="max-w-screen-xl mx-auto px-4 lg:px-8 lg:mt-10">
+		<>
+			<div className="max-w-screen-xl mx-auto px-4 lg:px-9 lg:mt-18">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 					<div className="order-1">
-						<div className="text-3xl font-medium lg:text-6xl text-center lg:text-left">
+						<div className="text-3xl font-medium lg:font-bold lg:text-6xl text-center lg:text-left">
 							<p className="space-y-3  text-left ">
 								<span className="block">Navigating the </span>
 								<span className="block">digital landscape </span>
 								<span className="block">for success</span>
 							</p>
 						</div>
-						<div className="lg:hidden mt-6">
+						<div className="lg:hidden mt-2">
 							<img
-								src="src/assets/illustration.png"
+								src="src/assets/image.png"
 								alt="Digital Illustration"
 								className="w-full"
 							/>
@@ -36,15 +61,15 @@ const Home = () => {
 							</p>
 						</div>
 						<div className="mt-4 flex justify-center lg:justify-start">
-							<button className="bg-[#191A23] text-white px-6 py-2 rounded-xl lg:mt-6 lg:text-xl lg:py-4 lg:px-10 w-full lg:w-auto">
+							<button className="bg-[#191A23] text-white px-6 lg:rounded-2xl py-2 rounded-xl lg:mt-6 lg:text-xl lg:py-5 lg:px-12 w-full lg:w-auto">
 								Book a consultation
 							</button>
 						</div>
 					</div>
 
-					<div className="hidden lg:block order-2 lg:order-2 lg:mt-6 lg:w-[600px]">
+					<div className="hidden lg:block order-2 lg:order-2 lg:w-[601px]">
 						<img
-							src="src/assets/illustration.png"
+							src="src/assets/image.png"
 							alt="Digital Illustration"
 							className="w-full"
 						/>
@@ -52,16 +77,15 @@ const Home = () => {
 				</div>
 			</div>
 
-			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
-				<div className="flex flex-wrap md:grid-cols-4 lg:grid-cols-6 mt-12 justify-center lg:gap-24 items-center gap-4">
-					{logos.map((logo) => (
-						<div key={logo}>
-							<img
-								src={`src/assets/${logo}.png`}
-								alt={logo}
-								className="w-16 lg:w-30 filter grayscale-100"
-							/>
-						</div>
+			<div className="overflow-hidden whitespace-nowrap mt-6 py-4">
+				<div className="inline-block animate-marquee">
+					{logos.map((logo, index) => (
+						<img
+							key={index}
+							src={`src/assets/${logo}.png`}
+							alt={logo}
+							className="w-16 lg:w-30 filter grayscale-100 mx-8 inline-block"
+						/>
 					))}
 				</div>
 			</div>
@@ -72,9 +96,14 @@ const Home = () => {
 						Services
 					</h1>
 					<p className="text-center mt-4 text-sm lg:mt-0 lg:text-xl">
-						At our digital marketing agency, we offer a range of services to{" "}
-						<br /> help businesses grow and succeed online. These services
-						include:
+						<p>
+							{" "}
+							At our digital marketing agency, we offer a range of services to
+						</p>
+						<p>
+							{" "}
+							help businesses grow and succeed online. These services include:
+						</p>
 					</p>
 				</div>
 			</div>
@@ -86,7 +115,9 @@ const Home = () => {
 							key={index}
 							title={item.title}
 							image={item.image}
+							textbg={item.textbg}
 							btnClr={item.btnClr}
+							Clr={item.Clr}
 							cardBgClr={item.cardBgClr}
 							textClr={item.textClr}
 						/>
@@ -198,7 +229,7 @@ const Home = () => {
 								/>
 							))}
 						</div>
-						<div className="bg-[#191A23]  w-full mx-auto flex justify-center mt-6  text-md text-white px-6 py-4 rounded-xl lg:mt-10 lg:text-xl lg:py-5 lg:px-16 lg:w-[269px] lg:ml-auto">
+						<div className="bg-[#191A23]   w-full mx-auto flex justify-center mt-6  text-md text-white px-6 py-4 rounded-xl lg:mt-10 lg:text-xl lg:py-5 lg:px-16 lg:w-[269px] ">
 							<button>See all Team</button>
 						</div>
 					</div>
@@ -223,8 +254,7 @@ const Home = () => {
 				</section>
 			</div>
 
-			{/* Contact Section */}
-			<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
+			<div className="max-w-screen-xl mx-auto  lg:px-8">
 				<section className="m-4">
 					<div className="bg-white h-fit p-4 pt-20 ">
 						<div className="mt-8 text-center justify-center rounded-xl lg:space-x-2 lg:flex lg:items-center lg:justify-start lg:gap-8 lg:mt-16">
@@ -235,8 +265,12 @@ const Home = () => {
 								Connect with Us: Let's Discuss Your Digital Marketing Needs
 							</p>
 						</div>
-						<div className="pt-[30px] lg:text-lg ">
-							<div className="flex flex-row lg:flex-row lg:px-16 lg:py-10 bg-[#F3F3F3] relative max-w-[1240px] m-auto rounded-4xl  overflow-hidden">
+						<form
+							ref={form}
+							onSubmit={sendEmail}
+							className="pt-[30px] lg:text-lg "
+						>
+							<div className="flex flex-row lg:flex-row lg:px-1 lg:py-10 bg-[#F3F3F3] relative max-w-[1240px]  rounded-4xl  overflow-hidden">
 								<div className="flex flex-col flex-1 p-6 lg:p-10 gap-4 ">
 									<div className="max-w-[556px] flex flex-col">
 										<div className="mb-6 flex space-x-14">
@@ -244,6 +278,7 @@ const Home = () => {
 												<input
 													type="radio"
 													name="name"
+													value="say_hello"
 													className="w-6 h-6 rounded-full  border-gray-500 text-green-500 "
 												/>
 												<span>Say Hi</span>
@@ -252,6 +287,7 @@ const Home = () => {
 												<input
 													type="radio"
 													name="name"
+													value="quote"
 													className="w-6 h-6 rounded-full border-gray-500 text-blue-500 "
 												/>
 												<span>Get a Quote</span>
@@ -263,8 +299,10 @@ const Home = () => {
 										</label>
 										<input
 											id="name"
+											name="name"
 											type="text"
 											placeholder="Name"
+											required
 											className="p-3 border-1 border-black bg-white rounded-xl mt-2"
 										/>
 										<label htmlFor="email" className=" pt-3">
@@ -273,7 +311,9 @@ const Home = () => {
 										<input
 											id="email"
 											type="email"
+											name="email"
 											placeholder="Email"
+											required
 											className="p-3 border border-black bg-white rounded-xl mt-2"
 										/>
 										<label htmlFor="message" className=" pt-3">
@@ -281,7 +321,9 @@ const Home = () => {
 										</label>
 										<textarea
 											id="message"
+											name="message"
 											placeholder="Message"
+											required
 											className="p-3 bg-white border border-black rounded-xl h-42 resize-none mt-2"
 										></textarea>
 										<button className=" hidden justify-center items-center md:flex mt-[40px] bg-[#191A23] text-white  rounded-xl hover:bg-[#333] transition p-4">
@@ -301,11 +343,11 @@ const Home = () => {
 							<button className="md:hidden w-full mx-auto  mt-4 bg-[#191A23] text-white py-2 px-4 rounded-xl hover:bg-[#333] transition pt-6 pb-4">
 								Send Message
 							</button>
-						</div>
+						</form>
 					</div>
 				</section>
 			</div>
-		</div>
+		</>
 	);
 };
 
