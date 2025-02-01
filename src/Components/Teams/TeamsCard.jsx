@@ -3,7 +3,7 @@ import React from "react";
 const TeamsCard = ({ photo, name, designation, work }) => {
 	return (
         <>
-		<div className="w-full p-8 lg:px-10 lg:py-8 border border-gray-800  border-b-6 border-b-gray-900 rounded-4xl lg:w-[385px] lg:h-[331px]">
+		<div className="w-full p-8 lg:px-10 lg:py-8 border border-gray-800  border-b-6 border-b-gray-900 rounded-4xl lg:w-[387px] lg:h-[354px]">
 			<div className="flex items-center  gap-6">
 				<img src={photo} alt={name} className=" object-cover" />
 				<div className="mt-">

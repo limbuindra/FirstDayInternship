@@ -13,7 +13,7 @@ input[type="radio"]:checked {
   }
   
   input[type="radio"]:checked + label {
-    color: lime; /* Changes the label text color to green when the radio button is selected */
+    color: lime; 
   }
   
   @keyframes marquee {

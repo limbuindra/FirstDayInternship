@@ -6,8 +6,8 @@ import Services from "./Pages/Services/Services";
 import UseCases from "./Pages/UseCases/useCases";
 import Pricing from "./Pages/Pricing/Pricing";
 import Blog from "./Pages/blog/Blog";
-import Navbar from "./Pages/Layout/Navbar";
 import Footer from "./Pages/Footer/Footer";
+import Navbar from "./Pages/Navbar/Navbar";
 
 const App = () => {
 	return (
