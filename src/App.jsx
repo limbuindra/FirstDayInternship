@@ -11,6 +11,8 @@ import BudgetCard from "./Components/Card/BudgetCard";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import SuccessPage from "./Components/SuccessPage/SuccessPage";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
 	const [currentStep, setCurrentStep] = useState(1);
@@ -39,7 +41,8 @@ const App = () => {
 		}),
 		onSubmit: (values) => {
 			setUserData(values);
-			console.log(values)
+			console.log(values);
+			// toast.success("Form submitted successfully!");
 			setCurrentStep(2);
 		},
 	});
@@ -61,9 +64,9 @@ const App = () => {
 				formik.handleSubmit();
 			}
 		} else if (currentStep === 2 && selectedCard.length === 0) {
-			alert("Please select at least one service.");
+			toast.info("Please select at least one service.")
 		} else if (currentStep === 3 && !userData.budget) {
-			alert("Please select a budget range.");
+			toast.info("Please select a budget range.");
 		} else if (currentStep < 4) {
 			setCurrentStep(currentStep + 1);
 		}
@@ -77,8 +80,6 @@ const App = () => {
 			setCurrentStep(currentStep - 1);
 		}
 	};
-
-
 
 	const submit = () => {
 		setIsSubmitted(true);
@@ -104,49 +105,65 @@ const App = () => {
 	return (
 		<>
 			<Header />
-			<div className="max-w-screen-md mx-auto px-4 lg:px-8">
-				<h1 className="font-bold text-xl text-center my-8">
+			<div className="max-w-screen-md mx-auto px-4 lg:px-14 lg:py-2">
+				<h1 className="font-bold text-2xl text-center lg:mt-8">
 					Get a Project Quote
 				</h1>
-				<div className="text-slate-500 text-sm text-center mb-8">
+				<div className="text-slate-500 text-sm lg:mt-2 text-center mb-6">
 					<p>
 						Please fill the form below to receive a quote for your project. Feel
 					</p>
 					<p>free to add as much detail as needed.</p>
 				</div>
 
-				<div className="lg:shadow-lg lg:border lg:px-8 lg:py-8 lg:pb-24 lg:border-slate-200 lg:rounded-4xl">
+				<div className="lg:shadow-lg lg:border lg:px-2 lg:py-10 lg:pb-14 lg:border-slate-200 lg:rounded-4xl">
 					<div className="flex justify-center mb-8">
-						<div className="flex items-center">
-							{[1, 2, 3, 4].map((step) => (
-								<React.Fragment key={step}>
+						{[1, 2, 3, 4].map((num, index) => (
+							<div key={num}>
+								<div className="flex items-center gap-2">
 									<div
-										className={`w-7 h-7 rounded-full flex items-center justify-center border-2 ${
-											currentStep >= step
+										className={`w-8 h-8 flex items-center justify-center text-sm font-semibold rounded-full transition-all duration-300 ${
+											currentStep > num
 												? "bg-blue-700 text-white"
-												: "bg-white text-gray-600 border-gray-300"
+												: currentStep === num
+												? "bg-blue-700 text-white"
+												: "bg-gray-300 text-gray-700"
 										}`}
 									>
-										{step}
+										{num}
 									</div>
-									{step < 4 && (
-										<div
-											className={`w-34 h-0.5 ${
-												currentStep > step ? "bg-blue-700" : "bg-gray-300"
-											}`}
-										/>
+
+									{index !== 3 && (
+										<div className="relative w-30 h-1">
+											<div className="absolute w-full h-full bg-gray-300 rounded"></div>
+
+											<div
+												className={`absolute h-full rounded transition-all duration-300 ${
+													currentStep > num
+														? "w-full bg-blue-700"
+														: currentStep === num
+														? "w-1/2 bg-blue-700"
+														: "w-0 bg-transparent"
+												}`}
+											></div>
+										</div>
 									)}
-								</React.Fragment>
-							))}
-						</div>
+								</div>
+							</div>
+						))}
 					</div>
 					<hr className="text-slate-200 " />
 
 					{currentStep === 1 && (
-						<div>
-							<h2 className="font-semibold text-xl mb-4">Contact Details</h2>
+						<div className="lg:px-10 lg:py-4">
+							<h2 className="font-bold text-xl lg:mb-2 lg:mt-14 ">
+								Contact Details
+							</h2>
+							<p className="text-slate-500 text-sm lg:mb-8">
+								Lorem ipsum dolor sit amet consectetur adipisc.
+							</p>
 							<form onSubmit={formik.handleSubmit}>
-								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+								<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
 									<div className="w-full">
 										<label className="block text-gray-900 text-sm font-bold mb-2">
 											Name
@@ -161,7 +178,7 @@ const App = () => {
 												onChange={formik.handleChange}
 												onBlur={formik.handleBlur}
 											/>
-											<CiUser className="text-gray-400 ml-2" />
+											<CiUser className="text-gray-400 text-2xl" />
 										</div>
 										{formik.touched.name && formik.errors.name && (
 											<p className="text-red-500 text-xs mt-1">
@@ -184,7 +201,7 @@ const App = () => {
 												onChange={formik.handleChange}
 												onBlur={formik.handleBlur}
 											/>
-											<AiOutlineMail className="text-gray-400 ml-2" />
+											<AiOutlineMail className="text-gray-400 ml-2 text-2xl" />
 										</div>
 										{formik.touched.email && formik.errors.email && (
 											<p className="text-red-500 text-xs mt-1">
@@ -209,7 +226,7 @@ const App = () => {
 												onChange={formik.handleChange}
 												onBlur={formik.handleBlur}
 											/>
-											<IoPhonePortraitOutline className="text-gray-400 ml-2" />
+											<IoPhonePortraitOutline className="text-gray-400 ml-2 text-2xl" />
 										</div>
 										{formik.touched.phone && formik.errors.phone && (
 											<p className="text-red-500 text-xs mt-1">
@@ -232,7 +249,7 @@ const App = () => {
 												onChange={formik.handleChange}
 												onBlur={formik.handleBlur}
 											/>
-											<BsBuildings className="text-gray-400 ml-2" />
+											<BsBuildings className="text-gray-400 ml-2 text-2xl" />
 										</div>
 										{formik.touched.company && formik.errors.company && (
 											<p className="text-red-500 text-xs mt-1">
@@ -247,13 +264,13 @@ const App = () => {
 
 					{currentStep === 2 && (
 						<div>
-							<div className="max-w-screen-xl mx-auto px-4 lg:px-8">
+							<div className="max-w-screen-xl mx-auto px-4 lg:px-6 lg:mt-12">
 								<h1 className="font-semibold text-xl">Our Services</h1>
 								<p className="text-slate-500 text-sm">
 									Please select which service you are interested in.
 								</p>
-								<div className="lg:mt-18 mt-4">
-									<div className="grid lg:grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+								<div className="lg:mt-14 mt-4">
+									<div className="grid lg:grid md:grid-cols-2 lg:grid-cols-2 lg:gap-8">
 										{Data.map((service, index) => (
 											<ServicesCard
 												key={index}
@@ -297,20 +314,20 @@ const App = () => {
 					)}
 
 					{currentStep === 4 && (
-						<div className="lg:flex lg:flex-col lg:items-center lg:mt-10 flex flex-col items-center justify-center text-center">
+						<div className="lg:flex lg:flex-col lg:items-center lg:mt-12 flex flex-col  items-center justify-center text-center">
 							<img src="src/assets/submit.svg" alt="submit" className="" />
 							<h1 className="lg:font-bold">Submit your quote request</h1>
 							<div className="text-slate-500 lg:mt-4">
 								<p>Please review all the information you previously typed in</p>
 								<p>
-									{" "}
-									the past steps, and if all is okay, submit your message to{" "}
+									the past currentSteps, and if all is okay, submit your message
+									to
 								</p>
 								<p>receive a project quote in 24 - 48 hours.</p>
 							</div>
 							<button
 								className="bg-blue-700 text-white
-			 px-6 py-2 rounded-3xl font-semibold 
+			 px-7 py-3 rounded-3xl font-semibold 
 			 cursor-pointer border-2 border-blue-700 hover:bg-slate-700 hover:text-white
 			 transition duration-200 ease-in-out lg:mt-6"
 								onClick={submit}
@@ -324,7 +341,7 @@ const App = () => {
 					{currentStep > 1 && (
 						<button
 							onClick={handlePrevious}
-							className="px-6 py-2 bg-gray-300 text-black rounded-3xl"
+							className="px-6 py-2 text-blue-500 border rounded-3xl"
 						>
 							Previous Step
 						</button>
@@ -338,6 +355,18 @@ const App = () => {
 						</button>
 					)}
 				</div>
+				<ToastContainer
+					position="top-center"
+					autoClose={5000}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick={false}
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme="light"
+				/>
 			</div>
 			<Footer />
 		</>

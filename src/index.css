@@ -3,3 +3,8 @@
 body {
     
 }
+
+input[type="radio"]:checked {
+    accent-color: blue;
+  }
+  

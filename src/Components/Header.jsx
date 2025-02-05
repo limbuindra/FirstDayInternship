@@ -7,7 +7,7 @@ const Header = () => {
     <div>    <div className="flex justify-around lg:gap-60 mt-6 items-center space-x-4">
                         <div className="flex space-x-4">
                             <img src={image} alt="image" className="w-7" />
-                        <h1 className="font-extrabold text-xl">
+                        <h1 className="font-extrabold text-2xl">
                             brix <span className="text-blue-600">templates</span>
                         </h1>
                         </div>
