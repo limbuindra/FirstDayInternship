@@ -14,9 +14,10 @@ import SuccessPage from "./Components/SuccessPage/SuccessPage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const App = () => {
 	const [currentStep, setCurrentStep] = useState(1);
-	const [userData, setUserData] = useState({});
+	const [userData, setUserData] = useState([]);
 	const [selectedCard, setSelectedCard] = useState([]);
 	const [selectedRange, setSelectedRange] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
@@ -42,7 +43,6 @@ const App = () => {
 		onSubmit: (values) => {
 			setUserData(values);
 			console.log(values);
-			// toast.success("Form submitted successfully!");
 			setCurrentStep(2);
 		},
 	});
@@ -64,15 +64,16 @@ const App = () => {
 				formik.handleSubmit();
 			}
 		} else if (currentStep === 2 && selectedCard.length === 0) {
-			toast.info("Please select at least one service.")
+			toast.info("Please select at least one service.");
 		} else if (currentStep === 3 && !userData.budget) {
 			toast.info("Please select a budget range.");
 		} else if (currentStep < 4) {
 			setCurrentStep(currentStep + 1);
 		}
 	};
+
 	const handleBudgetSelect = (index) => {
-		setUserData((prev) => ({ ...prev, budget: BudgetData[index].range }));
+		setUserData({ ...userData, budget: BudgetData[index].range });
 	};
 
 	const handlePrevious = () => {
@@ -81,14 +82,8 @@ const App = () => {
 		}
 	};
 
-	const submit = () => {
+	const handleSubmit = () => {
 		setIsSubmitted(true);
-		setUserData({
-			name: "",
-			email: "",
-			phone: "",
-			company: "",
-		});
 		setSelectedCard([]);
 		setSelectedRange([]);
 	};
@@ -270,7 +265,7 @@ const App = () => {
 									Please select which service you are interested in.
 								</p>
 								<div className="lg:mt-14 mt-4">
-									<div className="grid lg:grid md:grid-cols-2 lg:grid-cols-2 lg:gap-8">
+									<div className="grid lg:grid md:grid-cols-2 lg:grid-cols-2 lg:gap-8 gap-6">
 										{Data.map((service, index) => (
 											<ServicesCard
 												key={index}
@@ -300,10 +295,9 @@ const App = () => {
 									<div className="grid lg:grid md:grid-cols-2 lg:grid-cols-2 gap-6">
 										{BudgetData.map((item, index) => (
 											<BudgetCard
-												key={index}
-												id={item.id}
+												key={item.id}
 												range={item.range}
-												selected={userData.budget === item.range}
+												isSelected={userData.budget === item.range}
 												onSelect={() => handleBudgetSelect(index)}
 											/>
 										))}
@@ -330,7 +324,7 @@ const App = () => {
 			 px-7 py-3 rounded-3xl font-semibold 
 			 cursor-pointer border-2 border-blue-700 hover:bg-slate-700 hover:text-white
 			 transition duration-200 ease-in-out lg:mt-6"
-								onClick={submit}
+								onClick={handleSubmit}
 							>
 								Submit
 							</button>
@@ -357,7 +351,7 @@ const App = () => {
 				</div>
 				<ToastContainer
 					position="top-center"
-					autoClose={5000}
+					autoClose={1000}
 					hideProgressBar={false}
 					newestOnTop={false}
 					closeOnClick={false}
