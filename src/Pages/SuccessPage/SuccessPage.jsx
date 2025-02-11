@@ -1,6 +1,9 @@
 import React from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 const SuccessPage = ({ onClose }) => {
+	const navigate= useNavigate()
 	return (
 		<div className="flex flex-col h-screen  items-center justify-center bg-slate-100">
 			<div className="shadow-lg rounded-2xl">
@@ -16,7 +19,7 @@ const SuccessPage = ({ onClose }) => {
 					</p>
 					<button
 						className=" px-8 py-2 text-white rounded-4xl shadow-2xl mt-4 hover:text-gray-700 bg-green-600"
-						onClick={onClose}
+						onClick={()=>navigate("/")}
 					>
 						Cancel
 					</button>
