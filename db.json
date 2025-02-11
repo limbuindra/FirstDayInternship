@@ -1,15 +1,6 @@
 {
   "users": [
     {
-      "title": "this is the sixth title 12",
-      "id": "7832"
-    },
-    {
-      "id": "6abc",
-      "title": "this is the sixth title ",
-      "body": "This is a new post"
-    },
-    {
       "id": "53db",
       "title": "this is the sixth title 1",
       "body": "This is a new post"
@@ -23,10 +14,6 @@
       "id": "3071",
       "title": "This is my last text",
       "body": "This is a new post"
-    },
-    {
-      "title": "This is my last text",
-      "id": "7e48"
     },
     {
       "id": "4781",
@@ -62,27 +49,46 @@
       "id": "e625",
       "title": "2",
       "body": "This is a new post"
-    },
-    {
-      "id": "2abf",
-      "title": "3",
-      "body": "This is a new post"
-    },
-    {
-      "id": "d58d",
-      "title": "jjjjjj",
-      "body": "This is a new post"
-    },
-    {
-      "id": "d58d",
-      "title": "jjjjjj",
-      "body": "This is a new post"
-    },
-    {
-      "id": "d58d",
-      "title": "jjjjjj",
-      "body": "This is a new post"
     }
+  ],
 
+  "movies":[
+    {
+			"id": 1,
+			"title": "Home alone",
+			"release_date": "2020",
+			"image": "src/assets/home alone.jpeg"
+		},
+		{
+			"id": 2,
+			"title": "Terminator",
+			"release_date": "2022",
+			"image": "src/assets/terminator.jpeg"
+		},
+		{
+			"id": 3,
+			"title": "John wick",
+			"release_date": "2024",
+			"image": "src/assets/john wick.jpg"
+		},
+		{
+			"id": 4,
+			"title": "The matrix",
+			"release_date": "1999",
+			"image": "src/assets/matrix.jpg"
+		},
+		{
+			"id": 5,
+			"title": "IP man",
+			"release_date": "2000",
+			"image": "src/assets/ipmen.jpg"
+		},
+
+		{
+			"id": 6,
+			"title": "Avengers",
+			"release_date": "2021",
+			"image": "src/assets/avengers.jpg"
+		}
   ]
 }

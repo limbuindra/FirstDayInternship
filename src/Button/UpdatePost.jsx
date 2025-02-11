@@ -3,7 +3,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 const updatePost = async ({ id, title }) => {
-  const response = await axios.put(`http://localhost:3000/users/${id}`, { title });
+  const response = await axios.put(`http://localhost:3100/users/${id}`, {
+		title,
+	});
   return response.data;
 };
 

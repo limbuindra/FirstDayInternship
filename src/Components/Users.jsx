@@ -1,19 +1,24 @@
-import { isError, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+	isError,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
-import UpdatePost from "./Button/UpdatePost";
-import DeletePost from "./Button/DeletePost";
+import UpdatePost from "../Button/UpdatePost";
+import DeletePost from "../Button/DeletePost";
 
 const createPost = async (newPost) => {
-	const response = await axios.post("http://localhost:3000/users", newPost);
+	const response = await axios.post("http://localhost:3100/users", newPost);
 	return response.data;
 };
 const fetchUsers = async (page) => {
 	console.log(`Fetching Page: ${page}`);
 	const response = await axios.get(
-		`http://localhost:3000/users?_page=${page}&_limit=${5 * page}`
+		`http://localhost:3100/users?_page=${page}&_limit=${5 * page}`
 	);
-	console.log("REsponse", response.data);
+	console.log("Response", response.data);
 	return response.data;
 };
 
@@ -23,7 +28,7 @@ const Users = () => {
 	const [page, setPage] = useState(1);
 
 	const queryClient = useQueryClient();
-	const { data, isLoading,isError, error } = useQuery({
+	const { data, isLoading, isError, error } = useQuery({
 		queryKey: ["users", page],
 		queryFn: () => fetchUsers(page),
 		keepPreviousData: true,
@@ -38,7 +43,8 @@ const Users = () => {
 		mutationFn: createPost,
 	});
 
-	if (isLoading) return <p className="text-center text-4xl text-gray-600">Loading...</p>;
+	if (isLoading)
+		return <p className="text-center text-4xl text-gray-600">Loading...</p>;
 	if (isError)
 		return <p className="text-center text-red-500">Error: {error.message}</p>;
 
