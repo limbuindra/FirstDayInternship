@@ -5,6 +5,8 @@ import Homepage from "./Pages/Homepage";
 import InfiniteScroll from "./Components/InfiniteScroll";
 import Favorites from "./Pages/Favorites";
 import Navbar from "./Components/Navbar";
+import { MovieProvider } from "./contexts/MovieContext";
+
 const App = () => {
 	return (
 		<>
@@ -14,11 +16,14 @@ const App = () => {
 
 </Routes>  */}
 			{/* <InfiniteScroll/> */}
+      <MovieProvider>
+
 			<Navbar />
 			<Routes>
 				<Route path="/" element={<Homepage />} />
-				<Route path="/favorites" element={<Favorites />} />
+				<Route path="favorites/" element={<Favorites />} />
 			</Routes>
+      </MovieProvider>
 		</>
 	);
 };

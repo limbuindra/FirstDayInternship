@@ -1,2 +1,6 @@
 @import "tailwindcss";
 
+
+.min-h-screen {
+  min-height: 100vh; /* Ensures at least a full screen height */
+}
