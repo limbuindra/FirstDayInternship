@@ -14,14 +14,14 @@ function App() {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 	return (
 		<>
-			{/* <Routes>
+			<Routes>
 				<Route path="/" element={<Login />} />
 				<Route path="/register" element={<Register/>} />
 				<Route path="/chat" element={<Chat/>}/>
 
-			</Routes> */}
+			</Routes>
 
-			<Chat/>
+			{/* <Chat/> */}
 			{/* <div className="flex h-screen">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <ChatWindow />

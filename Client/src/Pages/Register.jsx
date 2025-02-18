@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
-import { IoPersonAdd } from "react-icons/io5";
+import { IoCloudyNight, IoPersonAdd } from "react-icons/io5";
 import { auth, createUserWithEmailAndPassword } from "../Config/Firebase"; // Import Firebase functions
 import { toast } from "react-toastify";
 
@@ -21,33 +21,56 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+	const displayName = e.target[0].value;
+	const email = e.target[1].value;
+	const password = e.target[2].value;
+	const confirmpassword = e.target[3].value;
 
-    if (
-      !formValues.username ||
-      !formValues.email ||
-      !formValues.password ||
-      !formValues.confirmpassword
-    ) {
-      toast.error("Please fill all fields.");
-      setLoading(false);
-      return;
-    }
+	// const file = e.target[3].files[0];
+	createUserWithEmailAndPassword(auth, email, password)
+	.then((userCredential) => {
+	  // Signed up 
+	  const user = userCredential.user;
+	  console.log("user", user)
+	  // ...
+	})
+	.catch((error) => {
+	  const errorCode = error.code;
+	  const errorMessage = error.message;
+	  // ..
+	}
+	)
+    // setLoading(true);
+	// console.log(e.target[0].value)
 
-    if (formValues.password !== formValues.confirmpassword) {
-      toast.error("Passwords do not match.");
-      setLoading(false);
-      return;
-    }
+    // if (
+    //   !formValues.username ||
+    //   !formValues.email ||
+    //   !formValues.password ||
+    //   !formValues.confirmpassword
+    // ) {
+    //   toast.error("Please fill all fields.");
+    //   setLoading(false);
+    //   return;
+    // }
 
-    try {
-      await createUserWithEmailAndPassword(auth, formValues.email, formValues.password);
-      toast.success("Registration successful!");
-      navigate("/login"); // Redirect to login after successful registration
-    } catch (error) {
-      toast.error(error.message); // Show error message
-    }
-    setLoading(false);
+    // if (formValues.password !== formValues.confirmpassword) {
+    //   toast.error("Passwords do not match.");
+    //   setLoading(false);
+    //   return;
+
+    // }
+
+    // try {
+    //   await createUserWithEmailAndPassword(auth, formValues.email, formValues.password);
+    //   toast.success("Registration successful!");
+    //   navigate("/login"); // Redirect to login after successful registration
+    // } catch (error) {
+    //   toast.error(error.message); // Show error message
+    // }
+    // setLoading(false);
+
+
   };
 
   return (
@@ -125,7 +148,7 @@ const Register = () => {
         <span className="flex justify-end">
           Already have an account?
           <button className="underline text-blue-500 cursor-pointer">
-            <Link to="/login"> Sign in instead</Link>
+            <Link to="/"> Sign in instead</Link>
           </button>
         </span>
       </form>

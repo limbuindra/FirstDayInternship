@@ -97,9 +97,13 @@ const Chat = () => {
           </div>
         ) : (
           <>
-            <div className="text-sm text-gray-600 mb-4">
-              Welcome, {username}! Room: {room}
+            <div className="text-xl mb-4">
+            Chat Room Name: {room}
             </div>
+            <div className=" text-gray-600 mb-4 text-lg">
+              Welcome, <span className="text-blue-500 ">{username} </span> 
+            </div>
+
 
             <div
               ref={chatContainerRef}

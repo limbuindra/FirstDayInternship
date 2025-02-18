@@ -83,7 +83,7 @@ const Login = () => {
 						className="text-lg bg-gray-500 hover:bg-gray-600 rounded-xl text-white py-2 w-full"
 						disabled={loading}
 					>
-						{loading ? "Logging in..." : "Login"}
+						Sign In
 					</button>
 				</div>
 				<span className="flex justify-end">
